@@ -1,1 +1,35 @@
+import throttle from 'lodash.throttle';
 
+const FORM_KEY = 'feedback-form-state';
+const refs = {
+  form: document.querySelector('.feedback-form'),
+  textarea: document.querySelector('textarea'),
+  input: document.querySelector('input'),
+};
+const formData = {};
+
+populateTextarea();
+
+refs.form.addEventListener('input', throttle(getFormValue, 500));
+refs.form.addEventListener('submit', onFormSubmmit);
+
+function getFormValue(event) {
+  formData[event.target.name] = event.target.value;
+  localStorage.setItem(FORM_KEY, JSON.stringify(formData));
+}
+
+function onFormSubmmit(event) {
+  event.preventDefault();
+  event.currentTarget.reset();
+  localStorage.removeItem(FORM_KEY);
+}
+
+function populateTextarea() {
+  const savedMessage = JSON.parse(localStorage.getItem(FORM_KEY));
+
+  if (!savedMessage) {
+    return;
+  }
+  refs.textarea.value = savedMessage['message'] || '';
+  refs.input.value = savedMessage['email'] || '';
+}
