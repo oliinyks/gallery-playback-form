@@ -20,7 +20,8 @@ function getFormValue(event) {
 
 function onFormSubmmit(event) {
   event.preventDefault();
-  event.currentTarget.reset();
+	event.currentTarget.reset();
+	console.log(localStorage.getItem(FORM_KEY));
   localStorage.removeItem(FORM_KEY);
 }
 
