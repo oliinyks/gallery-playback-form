@@ -19,18 +19,17 @@ function getFormValue(event) {
 }
 
 function onFormSubmmit(event) {
-	event.preventDefault();
-  if (refs.textarea.value || refs.input.value) {
-    event.currentTarget.reset();
-    console.log(localStorage.getItem(FORM_KEY));
-	  localStorage.removeItem(FORM_KEY);
-	  return
+  event.preventDefault();
+  if (!refs.textarea.value || !refs.input.value) {
+    return alert('Please fill in all the fields!');
   }
-  return alert('Please fill in all the fields!');
+  event.currentTarget.reset();
+  console.log(localStorage.getItem(FORM_KEY));
+  localStorage.removeItem(FORM_KEY);
 }
 
 function populateTextarea() {
-	const savedMessage = JSON.parse(localStorage.getItem(FORM_KEY));
+  const savedMessage = JSON.parse(localStorage.getItem(FORM_KEY));
   if (!savedMessage) {
     return;
   }
