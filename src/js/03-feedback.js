@@ -7,7 +7,6 @@ const refs = {
   input: document.querySelector('input'),
 };
 const formData = {};
-const savedMessage = JSON.parse(localStorage.getItem(FORM_KEY));
 
 populateTextarea();
 
@@ -20,8 +19,8 @@ function getFormValue(event) {
 }
 
 function onFormSubmmit(event) {
-  event.preventDefault();
-  if (savedMessage['message'] && savedMessage['email']) {
+	event.preventDefault();
+  if (refs.textarea.value && refs.input.value) {
     event.currentTarget.reset();
     console.log(localStorage.getItem(FORM_KEY));
     localStorage.removeItem(FORM_KEY);
@@ -30,6 +29,7 @@ function onFormSubmmit(event) {
 }
 
 function populateTextarea() {
+	const savedMessage = JSON.parse(localStorage.getItem(FORM_KEY));
   if (!savedMessage) {
     return;
   }
