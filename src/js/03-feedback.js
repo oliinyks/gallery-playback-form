@@ -23,7 +23,8 @@ function onFormSubmmit(event) {
   if (refs.textarea.value && refs.input.value) {
     event.currentTarget.reset();
     console.log(localStorage.getItem(FORM_KEY));
-    localStorage.removeItem(FORM_KEY);
+	  localStorage.removeItem(FORM_KEY);
+	  return
   }
   return alert('Please fill in all the fields!');
 }
