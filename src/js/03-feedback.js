@@ -7,6 +7,7 @@ const refs = {
   input: document.querySelector('input'),
 };
 const formData = {};
+const savedMessage = JSON.parse(localStorage.getItem(FORM_KEY));
 
 populateTextarea();
 
@@ -20,14 +21,15 @@ function getFormValue(event) {
 
 function onFormSubmmit(event) {
   event.preventDefault();
-	event.currentTarget.reset();
-	console.log(localStorage.getItem(FORM_KEY));
-  localStorage.removeItem(FORM_KEY);
+  if (savedMessage['message'] && savedMessage['email']) {
+    event.currentTarget.reset();
+    console.log(localStorage.getItem(FORM_KEY));
+    localStorage.removeItem(FORM_KEY);
+  }
+  return alert('Please fill in all the fields!');
 }
 
 function populateTextarea() {
-  const savedMessage = JSON.parse(localStorage.getItem(FORM_KEY));
-
   if (!savedMessage) {
     return;
   }
