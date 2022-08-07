@@ -20,7 +20,7 @@ function getFormValue(event) {
 
 function onFormSubmmit(event) {
 	event.preventDefault();
-  if (refs.textarea.value && refs.input.value) {
+  if (refs.textarea.value || refs.input.value) {
     event.currentTarget.reset();
     console.log(localStorage.getItem(FORM_KEY));
 	  localStorage.removeItem(FORM_KEY);
